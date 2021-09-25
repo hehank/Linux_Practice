@@ -1,0 +1,1 @@
+[邁向Linux工程師之路 第二版](https://www.tenlong.com.tw/products/9789864344383)的筆記
