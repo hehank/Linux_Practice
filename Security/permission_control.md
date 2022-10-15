@@ -78,10 +78,45 @@ lang: zh-tw
 - 英文全名：File System UID
 - 中文全名：檔案系統使用者 ID
 - 只用於對`檔案系統`的`存取權限`控制，在沒有明確設定的情況下與 EUID 相同，且 EUID 改變也會影響到 FSUID。
-  > [color=#E6BB45]*PS. 若 FSUID 為 root 的 UID，則 SUID、RUID 與 EUID 必需至少有一個為 root 的 UID。*
+  > [color=#d19a25]*PS. 若 FSUID 為 root 的 UID，則 SUID、RUID 與 EUID 必需至少有一個為 root 的 UID。*
 - FSUID 的目的是允許 process（例如，NFS 服務器）將自己限制為某些指定 uid 的文件系統權限，而不授予該 uid 向它們發送信號的權限。
 - 在 2.0 版本之後的 kernel ，不再需要 FSUID，因為支援 SUSv3 規則。
 
 # GID
 
 # 檔案的特殊屬性
+### SUID
+- 英文全名：Set UID。
+- 設置使文件在`執行階段`具有`文件所有者`的權限。
+- 僅可用在`二進位制檔案 (binary file)` 上。
+- 表示設置此屬性：`rws rw- r--`
+
+### SGID
+- 英文全名：Set GID
+- 只對`目錄`有效。
+- 目錄被設置後，`任何用戶`在此目錄下建立的文件，`所屬群組`皆與`該目錄`所屬的群組相同。
+- 可使用在特定的多人團隊的專案開發上。
+- 表示設置此屬性：`rwx rws rw-`
+
+### SBIT
+- 英文全名：Sticky Bit。
+- 防刪除屬性，只對目錄有效。
+- 在具有 `SBIT` 的目錄下，使用者若在`該目錄下`具有 w 及 x 的權限，則當使用者在該目錄下`建立檔案或目錄`時，只有`檔案擁有者`與 `root` 才有權力刪除。
+- 表示設置此屬性：`rwx rw- rwt` 
+
+### 權限的顯示與設定
+- 本來在該位上有 x 屬性：
+    - 特殊屬性顯示為小寫字母 `(s, s, t)`
+- 否則：
+    - 顯示為大寫字母 `(S, S, T)`
+- 權限設定：
+    - 4 -> SUID
+    - 2 -> SGID
+    - 1 -> SBIT
+    > [color=#d19a25]*PS. 設定權限時會將特殊權限家在最前面*
+    >
+    > *EX. `chmod 4755 file`*
+
+# Refernce
+- [檔案的特殊屬性 SUID/SGID/SBIT](https://dywang.csie.cyut.edu.tw/dywang/linuxsecurity/node39.html)
+- [使用者ID](https://zh.wikipedia.org/zh-tw/%E7%94%A8%E6%88%B7ID)
