@@ -6,6 +6,8 @@ lang: zh-tw
 
 {%hackmd theme-dark %}
 
+[![hackmd-github-sync-badge](https://hackmd.io/EkxCjUItRHGP_jT1H7dbOA/badge)](https://hackmd.io/EkxCjUItRHGP_jT1H7dbOA)
+
 # xxd --help
 ```shell=
 Usage:
